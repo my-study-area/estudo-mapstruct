@@ -2,6 +2,8 @@ package br.com.estudo.estudo_mapstruct;
 
 import br.com.estudo.estudo_mapstruct.entidades.Contrato1;
 import br.com.estudo.estudo_mapstruct.entidades.Mutuario1;
+import br.com.estudo.estudo_mapstruct.mappers.Contrato1Mapper;
+import br.com.estudo.estudo_mapstruct.mappers.Mutuario1Mapper;
 import br.com.estudo.estudo_mapstruct.repository.ContratoRespository;
 import br.com.estudo.estudo_mapstruct.repository.MutuarioRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -18,9 +20,16 @@ public class EstudoMapstructApplication implements CommandLineRunner {
 
     private final ContratoRespository contratoRespository;
 
-    public EstudoMapstructApplication(MutuarioRepository mutuarioRepository, ContratoRespository contratoRespository) {
+    private final Mutuario1Mapper mutuario1Mapper;
+
+    private final Contrato1Mapper contrato1Mapper;
+
+
+    public EstudoMapstructApplication(MutuarioRepository mutuarioRepository, ContratoRespository contratoRespository, Mutuario1Mapper mutuario1Mapper, Contrato1Mapper contrato1Mapper) {
         this.mutuarioRepository = mutuarioRepository;
         this.contratoRespository = contratoRespository;
+        this.mutuario1Mapper = mutuario1Mapper;
+        this.contrato1Mapper = contrato1Mapper;
     }
 
     public static void main(String[] args) {
@@ -39,5 +48,10 @@ public class EstudoMapstructApplication implements CommandLineRunner {
         contratoRespository.save(contrato1);
         System.out.println(contrato1);
 
+        System.out.println("");
+        System.out.println(mutuario1Mapper.toDto(mutuario1));
+        System.out.println(mutuario1Mapper.toDtoString(mutuario1));
+        System.out.println(contrato1Mapper.toDto(contrato1));
+        System.out.println(contrato1Mapper.toDtoString(contrato1));
     }
 }
